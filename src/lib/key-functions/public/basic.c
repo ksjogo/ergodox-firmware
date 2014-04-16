@@ -162,6 +162,32 @@ static void layer_pop(uint8_t local_id) {
 
 /*
  * [name]
+ *   pop read
+ *
+ * [description]
+ */
+void kbfun_layer_pop_read(void) {
+    uint8_t i = kb_layout_get(LAYER, ROW, COL);
+    if (i > 0 && i < 10)
+        layer_pop(i);
+}
+
+/*
+ * [name]
+ *   pop read
+ *
+ * [description]
+ */
+void kbfun_layer_push_read(void) {
+    uint8_t i = kb_layout_get(LAYER, ROW, COL);
+    if (i > 0 && i < 10)
+        layer_push(i);
+}
+
+
+
+/*
+ * [name]
  *   Layer push #1
  *
  * [description]

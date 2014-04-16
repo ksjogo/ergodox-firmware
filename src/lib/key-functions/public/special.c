@@ -164,3 +164,86 @@ void kbfun_mediakey_press_release(void) {
 /* ----------------------------------------------------------------------------
  * ------------------------------------------------------------------------- */
 
+/* ----------------------------------------------------------------------------
+ * jg-extra-functions
+ * ------------------------------------------------------------------------- */
+void __send_layer_last_key_if_tap (void) {
+    if (   !IS_PRESSED
+        && ROW == main_arg_row_last
+        && COL == main_arg_col_last)
+    {
+        uint8_t keycode = kb_layout_get(KB_LAYERS-1, ROW, COL);
+        _kbfun_press_release(true, keycode);
+        //we need to force an usb update, otherwise the press would not be
+        //recogized, better were an after tick functionality
+        usb_keyboard_send();
+        _kbfun_press_release(false, keycode);
+    }
+}
+
+void kbfun_mod_or_tap (void) {
+    kbfun_press_release();
+    if(!IS_PRESSED)
+        __send_layer_last_key_if_tap();
+}
+
+void kbfun_layer_push_read_or_tap (void) {
+    kbfun_layer_push_read();
+}
+
+void kbfun_layer_pop_read_or_tap (void) {
+    kbfun_layer_pop_read();
+    __send_layer_last_key_if_tap();
+}
+
+void kbfun_layer_push_pop_read_or_tap (void) {
+    if (IS_PRESSED)
+        kbfun_layer_push_read_or_tap();
+    else
+        kbfun_layer_pop_read_or_tap();
+}
+
+/*
+ * [name]
+ *   guiL + press|release
+ *
+ * [description]
+ *   Generate a 'lgui' press or release before the normal keypress or
+ *   keyrelease
+ */
+void kbfun_lgui_press_release(void) {
+	_kbfun_press_release(IS_PRESSED, KEY_LeftGUI);
+	kbfun_press_release();
+}
+
+/*
+ * [name]
+ *   guiL + press|release
+ *
+ * [description]
+ *   Generate a 'lgui' press or release before the normal keypress or
+ *   keyrelease
+ */
+void kbfun_rctrl_press_release(void) {
+	_kbfun_press_release(IS_PRESSED, KEY_RightControl);
+	kbfun_press_release();
+}
+
+void kbfun_lctrl_press_release(void) {
+	_kbfun_press_release(IS_PRESSED, KEY_LeftControl);
+	kbfun_press_release();
+}
+
+/*
+ * [name]
+ *   guiL + shift + press|release
+ *
+ * [description]
+ *   Generate a 'lgui|shift' press or release before the normal keypress or
+ *   keyrelease
+ */
+void kbfun_lgui_shift_press_release(void) {
+	_kbfun_press_release(IS_PRESSED, KEY_LeftGUI);
+	_kbfun_press_release(IS_PRESSED, KEY_LeftShift); 
+	kbfun_press_release();
+}

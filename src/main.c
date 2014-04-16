@@ -45,6 +45,9 @@ bool    main_arg_is_pressed;
 bool    main_arg_was_pressed;
 bool    main_arg_any_non_trans_key_pressed;
 bool    main_arg_trans_key_pressed;
+//for tapped keys
+uint8_t main_arg_row_last;
+uint8_t main_arg_col_last;
 
 // ----------------------------------------------------------------------------
 
@@ -189,6 +192,9 @@ void main_exec_key(void) {
 	//  for this layer (a non-transparent key) was pressed, pop the layer
 	if (layers[layers_head].sticky == eStickyOnceUp && main_arg_any_non_trans_key_pressed)
 		main_layers_pop_id(layers_head);
+
+    main_arg_col_last = col;
+    main_arg_row_last = row;
 }
 
 /*

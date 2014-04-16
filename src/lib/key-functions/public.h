@@ -51,6 +51,11 @@
 	void kbfun_layer_pop_8   (void);
 	void kbfun_layer_pop_9   (void);
 	void kbfun_layer_pop_10  (void);
+
+	void kbfun_layer_push_read (void);
+	void kbfun_layer_pop_read  (void);
+
+
 	// ---
 
 	// device
@@ -62,6 +67,14 @@
 	void kbfun_layer_push_numpad             (void);
 	void kbfun_layer_pop_numpad              (void);
 	void kbfun_mediakey_press_release        (void);
+	void kbfun_mod_or_tap                    (void);
+	void kbfun_layer_push_read_or_tap        (void);
+	void kbfun_layer_pop_read_or_tap         (void);
+    void kbfun_layer_push_pop_read_or_tap    (void);
+	void kbfun_lgui_shift_press_release      (void);
+	void kbfun_lgui_press_release            (void);
+	void kbfun_rctrl_press_release           (void);
+	void kbfun_lctrl_press_release           (void);
 
 #endif
 

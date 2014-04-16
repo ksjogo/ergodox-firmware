@@ -31,8 +31,7 @@
 
 	extern uint8_t main_loop_row;
 	extern uint8_t main_loop_col;
-
-	extern uint8_t main_arg_layer;
+ 	extern uint8_t main_arg_layer;
 	extern uint8_t main_arg_layer_offset;
 	extern uint8_t main_arg_row;
 	extern uint8_t main_arg_col;
@@ -40,7 +39,9 @@
 	extern bool    main_arg_was_pressed;
 	extern bool    main_arg_any_non_trans_key_pressed;
 	extern bool    main_arg_trans_key_pressed;
-
+    //for tapped keys
+    extern uint8_t main_arg_row_last;
+    extern uint8_t main_arg_col_last;
 	// --------------------------------------------------------------------
 
 	void main_exec_key (void);
